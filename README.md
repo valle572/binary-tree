@@ -3,8 +3,7 @@
 
 ## Table of Contents
 * [General Info](#general-information)
-* [Features](#features)
-<!-- * [Screenshots](#screenshots) -->
+* [Features](#features) <!-- * [Screenshots](#screenshots) -->
 * [Setup](#setup)
 * [Usage](#usage)
 * [Project Status](#project-status)
@@ -29,13 +28,9 @@ List the ready features here:
 ![Example screenshot](./img/screenshot.png)
 If you have screenshots you'd like to share, include them here.
 -->
-
-
 ## Setup
 I am using the GNU C++ compiler to run my programs, examples will be using the g++ compiler. I am also using kate as my text editor.
 
-To install:
-- Choose the desired location to clone git into
 Clone git:
 ```sh
 git clone https://github.com/valle572/binary-tree.git
@@ -45,13 +40,16 @@ Open folder:
 ```sh
 cd binary-tree
 ```
-For README:
-```sh
-kate README.md
-```
-To compile:
+
+Compile:
 ```sh
 g++ main.cpp -o main
+```
+
+
+For README file:
+```sh
+kate README.md
 ```
 
 ## Usage
