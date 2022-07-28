@@ -4,14 +4,13 @@
 ## Table of Contents
 * [General Info](#general-information)
 * [Features](#features)
-* [Screenshots](#screenshots)
+<!-- * [Screenshots](#screenshots) -->
 * [Setup](#setup)
 * [Usage](#usage)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
 * [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
-<!-- * [License](#license) -->
 
 
 ## General Information
@@ -25,10 +24,11 @@ List the ready features here:
 - Runs tests to ensure proper functionality
 - Displays basic memory allocation data
 
-
+<!--
 ## Screenshots
 ![Example screenshot](./img/screenshot.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
+If you have screenshots you'd like to share, include them here.
+-->
 
 
 ## Setup
