@@ -1,3 +1,5 @@
+![files](https://img.shields.io/github/directory-file-count/valle572/binary-tree) ![license](https://img.shields.io/github/license/valle572/binary-tree) 
+
 # binary-tree
 > C++ program using pointers and recursion
 
