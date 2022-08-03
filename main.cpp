@@ -2,33 +2,30 @@
 #include <iostream>
 using namespace std;
 
-int usedMem = 0; // Global Memory Tracker
+// Global variable to keep track of memory in use
+int usedMem = 0;
 
 void* operator new(size_t size) {
-    
     usedMem += size;
     cout << "[Allocating " << size << " bytes]\n";
     return malloc(size);
 }
 
-void operator delete(void* mem, size_t size) {
-
+void operator delete(void* memPtr, size_t size) {
     usedMem -= size;
     cout << "[Freeing " << size << " bytes]\n";
-    free(mem);
+    free(memPtr);
 }
 
-// Prints message specifying data being inserted
-void addMsg(int data) { cout << "Attempting to add: " << data << "\n"; };
-void divider() { cout << "________________________________________\n"; };
+void PrintDivider() { cout << "________________________________________\n"; };
 
 class Node {
 public:
     Node(int nodeData) {
         data = nodeData;
     };
-    Node *left         = nullptr;
-    Node *right        = nullptr;
+    Node *left  = nullptr;
+    Node *right = nullptr;
     int data;
     ~Node() {};
 };
@@ -39,42 +36,41 @@ public:
     Tree() = default;
 
     Tree(int data) {  // Tree with one node
-        root = Insert(root, data);
+        root = insertData(root, data);
     }
 
-    void PrintTree()           { Print(root); };
-    void PrintTree(Node *node) { Print(node); };
-    void cleanTree()           { cleanTree(root); };
-    void Add(int data)         { root = Insert(root, data); };
-    Node *Find(int data)       { return Search(root, data); };
+    void printTree()           { Print(root); };
+    void printTree(Node *node) { Print(node); };
+    void freeAllocatedData()   { freeAllocatedData(root); };
+    void addData(int data)     { root = insertData(root, data); };
+    Node *searchFor(int data)  { return searchData(root, data); };
 
     ~Tree() {};
 
 private:
     Node *root = nullptr;
 
-    Node *Insert(Node *node, int data) {
+    Node *insertData(Node *node, int data) {
 
         if (node == nullptr) {        // Insert Data
             node = new Node(data);
-            addMsg(data);
             cout << "Inserted new data: " << data << "\n\n";
             return node;
         }
         if (data < node->data)       // Recurse left
-            node->left  = Insert(node->left, data);
+            node->left  = insertData(node->left, data);
 
         if (data > node->data)      // Recurse right
-            node->right = Insert(node->right, data);
+            node->right = insertData(node->right, data);
         return node;
     }
-    Node *Search(Node *node, int data) {
+    Node *searchData(Node *node, int data) {
 
         if (node == nullptr || data == node->data)
             return node;                          // Node is found or empty
 
         node = (data < node->data) ? node->left : node->right;
-        return Search(node, data);                // Recurse left or right
+        return searchData(node, data);            // Recurse left or right
     }
     void Print(Node *node) {
         try {
@@ -88,40 +84,40 @@ private:
             cout << "[Exception occured] " << e << "\n";
         }
     }
-    void cleanTree(Node *node) {
+    void freeAllocatedData(Node *node) {
         if (node == nullptr)
             return;
 
-        cleanTree(node->left);
-        cleanTree(node->right);
+        freeAllocatedData(node->left);
+        freeAllocatedData(node->right);
         delete node;
     }
 };
-void beginTests() {
+void BeginTests() {
 
     int  data[] = {-1, 6, 7, 1, 9, -5, 4},
-         size   = sizeof(data) / sizeof(int),
-         maxVal = 10;      // for search loop
+         arraySize   = sizeof(data) / sizeof(int),
+         MAX_SEARCH_VAL = 10;      // for search loop
 
-    divider();
+    PrintDivider();
     cout << "Adding data to the Tree . . .\n\n";
 
     Tree tree(10);         // Tree with one Node
-    for (int i = 0; i < size; i++)
-        tree.Add(data[i]);
+    for (int i = 0; i < arraySize; i++)
+        tree.addData(data[i]);
 
-    divider();
+    PrintDivider();
     cout << "Printing data using In-Order Traversal . . .\n\n";
 
-    tree.PrintTree();
+    tree.printTree();
 
-    divider();
+    PrintDivider();
     cout << "Undergoing a series of searches . . .\n\n";
 
-    for (int toFind = 5; toFind <= maxVal; toFind++) {
+    for (int toFind = 5; toFind <= MAX_SEARCH_VAL; toFind++) {
 
         cout << "Looking for data: " << toFind << " . . .\n";
-        bool found = tree.Find(toFind);
+        bool found = tree.searchFor(toFind);
 
         if (found)
             cout << " [Success]  Found Node: " << toFind << "\n\n";
@@ -129,28 +125,28 @@ void beginTests() {
             cout << "[Not Found] Looked for: " << toFind << "\n\n";
     }
 
-    divider();
+    PrintDivider();
     cout << "Testing exception handling . . .\n\n";
     
     Node *testNode = nullptr;
     Tree testTree;
 
-    testTree.PrintTree(testNode); // Nullptr
+    testTree.printTree(testNode); // Nullptr
 
     cout << "\nException handling successful!\n\n";
 
-    divider();
+    PrintDivider();
     cout << "Freeing Memory . . .\n\n";
-    tree.cleanTree();
+    tree.freeAllocatedData();
 
 }
 int main() {
 
-    beginTests();
+    BeginTests();
     
-    divider();
+    PrintDivider();
     cout << "\nMemory Usage: " << usedMem << " Bytes\n\n";
-    divider();
+    PrintDivider();
     cout << "Tests Completed!\n\n";
 
     return 0;
