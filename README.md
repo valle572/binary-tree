@@ -20,7 +20,6 @@
 
 
 ## Features
-List the ready features here:
 - Runs tests to ensure proper functionality
 - Displays basic memory allocation data
 
@@ -62,10 +61,6 @@ To run from binary-tree folder:
 ```
 
 
-## Project Status
-Project is: _in progress_
-
-
 ## Room for Improvement
 Some things that can be improved are the:
 - readability
@@ -82,4 +77,4 @@ To do:
 
 
 ## Contact
-Created by [@valle572](https://valleweb.site) - feel free to contact me :)
+Created by [@valle572](https://itsvalle.com) - feel free to contact me :)
